@@ -8,6 +8,32 @@ var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+// requiring and creating database connection
+
+var mongoose = require('mongoose');
+
+var mongoDB = 'mongodb://127.0.0.1/bnb_database';
+mongoose.connect(mongoDB);
+
+mongoose.Promise = global.Promise;
+
+var db = mongoose.connection;
+var Schema = mongoose.Schema;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+var available_properties = new Schema({
+  property_name: String,
+  price_per_night: Number,
+  property_specs: String,
+  location: String,
+  detailed_description: String,
+  date_available: Date,
+  available_until: Date,
+  email_address: String
+});
+
+var properties = mongoose.model('properties', available_properties );
 
 var app = express();
 
