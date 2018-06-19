@@ -23,8 +23,14 @@ router.post('/', function (req, res, next) {
   const test = new Property({
     property_name: data.property_name,
     price_per_night: data.price_per_night,
-    property_specs: data.property_specs,
-    location: data.location,
+    //change this to new specs
+    //property_specs: data.property_specs,
+    guests: 1,
+    bedrooms:2,
+    beds: 3,
+    bath: 4,
+
+    location: data.property_specs,
     detailed_description: data.detailed_description,
     date_available: data.date_available,
     available_until: data.available_until,
