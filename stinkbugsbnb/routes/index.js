@@ -57,4 +57,12 @@ router.get('/display-property', function (req, res, next) {
 
 })
 
+router.get('/sign_up', function (req, res, next) {
+  res.render('sign_up')
+})
+
+router.get('/login', function (req, res, next) {
+  res.render('login')
+})
+
 module.exports = router;
