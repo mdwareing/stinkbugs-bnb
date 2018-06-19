@@ -12,4 +12,4 @@ const PropertySchema = new Schema({
     email_address: String
   });
   
-module.exports = mongoose.model('Property', PropertySchema );
+module.exports = mongoose.model('Property', PropertySchema);

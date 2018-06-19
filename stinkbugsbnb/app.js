@@ -11,10 +11,11 @@ var usersRouter = require('./routes/users');
 // requiring and creating database connection
 
 var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-var mongoDB = 'mongodb://127.0.0.1/bnb_database';
-mongoose.connect(mongoDB);
 
+var mongoDB = 'mongodb://admin123:admin123@ds161700.mlab.com:61700/stinkbugs-bnb';
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var app = express();
