@@ -38,9 +38,9 @@ router.post('/', function (req, res, next) {
 })
 
 router.get('/display-property', function (req, res, next) {
-  res.render('display-property', {
-    data: req.body
-  })
+  var data = db.collection('properties').find( {} );
+  console.log(data)
+  res.render('display-property', {test:data} )
 })
 
 module.exports = router;

@@ -1,6 +1,4 @@
-<h1><%= data.property_name %></h1>
-<%= data.price_per_night %>
-<%= data.property_specs %>
-<%= data.location %>
-<%= data.detailed_description %>
-<%= data.email_address %>
+
+<% test.forEach( function(element){ %>
+    <p><%= element.property_name %></p>
+<% }); %>
