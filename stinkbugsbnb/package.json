@@ -9,7 +9,6 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.3",
-    "cypress": "^3.0.1",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.16.0",
@@ -20,6 +19,7 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
+    "cypress": "^3.0.1",
     "nodemon": "^1.17.5"
   }
 }

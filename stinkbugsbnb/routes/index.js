@@ -25,11 +25,10 @@ router.post('/', function (req, res, next) {
     price_per_night: data.price_per_night,
     //change this to new specs
     //property_specs: data.property_specs,
-    guests: 1,
-    bedrooms:2,
-    beds: 3,
-    bath: 4,
-
+    guests: data.guests,
+    bedrooms: data.bedrooms,
+    beds: data.beds,
+    bath: data.bath,
     location: data.property_specs,
     detailed_description: data.detailed_description,
     date_available: data.date_available,
@@ -44,9 +43,18 @@ router.post('/', function (req, res, next) {
 })
 
 router.get('/display-property', function (req, res, next) {
-  var data = db.collection('properties').find( {} );
-  console.log(data)
-  res.render('display-property', {test:data} )
+
+ Property.find()
+   .exec(function (err, list_books) {
+     if (err) {
+       return next(err);
+     }
+     res.render('display-property', {
+       title: 'Book List',
+       data: list_books
+     });
+   });
+
 })
 
 router.get('/sign_up', function (req, res, next) {
