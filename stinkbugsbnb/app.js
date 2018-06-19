@@ -8,17 +8,17 @@ var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+
+var app = express();
+
 // requiring and creating database connection
-
 var mongoose = require('mongoose');
-
 var mongoDB = 'mongodb://admin123:admin123@ds161700.mlab.com:61700/stinkbugs-bnb';
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

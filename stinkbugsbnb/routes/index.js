@@ -18,6 +18,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
+
   const data = req.body
   const test = new Property({
     property_name: data.property_name,
