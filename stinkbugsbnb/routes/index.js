@@ -40,8 +40,17 @@ router.post('/', function(req, res, next) {
   res.redirect('display-property')
 })
 
-router.get('/display-property', function(req,res,next) {
-  res.render('display-property', {data: req.body})
+router.get('/display-property', function (req, res, next) {
+ Property.find()
+   .exec(function (err, list_books) {
+     if (err) {
+       return next(err);
+     }
+     res.render('display-property', {
+       title: 'Book List',
+       data: list_books
+     });
+   });
 })
 
 module.exports = router;
