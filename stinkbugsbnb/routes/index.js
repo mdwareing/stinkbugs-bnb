@@ -13,11 +13,11 @@ require('../models/Property');
 const Property = mongoose.model('Property');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('add-property');
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
 
   const data = req.body
   const test = new Property({
@@ -30,12 +30,17 @@ router.post('/', function(req, res, next) {
     available_until: data.available_until,
     email_address: data.email_address
   })
-  db.collection('properties').insert(test);
+  db.collection('properties').save(test, function (err) {
+    if (err) return handleError(err);
+    // saved!
+  });
   res.redirect('display-property')
 })
 
-router.get('/display-property', function(req,res,next) {
-  res.render('display-property', {data: req.body})
+router.get('/display-property', function (req, res, next) {
+  res.render('display-property', {
+    data: req.body
+  })
 })
 
 module.exports = router;
