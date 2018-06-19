@@ -1,9 +1,9 @@
-context('user adds property with form', () => {
+context('each property has unique URL', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/')
   })
 
-  it('user can submit property', () => {
+  it('user can view individual property page', () => {
     cy.get('input[name=property_name]')
       .type('Villa Horrorio')
     cy.get('input[name=price_per_night]')
@@ -27,8 +27,5 @@ context('user adds property with form', () => {
     cy.get('input[name=email_address]')
       .type('test@email.com')
     cy.get('#add_property-form').submit()
-      // .next().should('contain', 'Villa Horrorio', '140', '5 bedrooms', 'Cool property in the heart of Sardinia. No dogs allowed.')
-    cy.contains('Villa Horrorio')
   })
-
 })

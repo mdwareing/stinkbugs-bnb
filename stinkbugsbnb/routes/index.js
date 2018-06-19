@@ -41,13 +41,13 @@ router.post('/', function(req, res, next) {
 
 router.get('/display-property', function (req, res, next) {
  Property.find()
-   .exec(function (err, list_books) {
+   .exec(function (err, list_properties) {
      if (err) {
        return next(err);
      }
      res.render('display-property', {
        title: 'Book List',
-       data: list_books
+       data: list_properties
      });
    });
 })
