@@ -3,7 +3,7 @@ var router = express.Router();
 const mongoose = require('mongoose');
 
 require('../models/Property');
-const Poll = mongoose.model('Property');
+const Property = mongoose.model('Property');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   // res.redirect('/display-property', {data: req.body})
+  
   res.render('display-property', {data: req.body})
 })
 
