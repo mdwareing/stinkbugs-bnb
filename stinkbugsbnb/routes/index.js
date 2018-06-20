@@ -10,6 +10,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 require('../models/Property');
+require('../models/User');
 const Property = mongoose.model('Property');
 
 /* GET home page. */
@@ -57,9 +58,24 @@ router.get('/display-property', function (req, res, next) {
 
 })
 
-router.get('/sign_up', function (req, res, next) {
-  res.render('sign_up')
+router.get('/signup', function (req, res, next) {
+  	res.render('sign_up')
 })
+
+router.post('/signup_form', function (req, res, next) {
+	const data = req.body
+	const User = mongoose.model('User');
+	new_user = new User({
+		user_name: data.user_name,
+		email_address: data.email_address,
+		password: data.password
+	})
+	db.collection('users').save(new_user, function(err){
+		if (err) return handleError(err);
+	})
+  	res.redirect('display-property')
+})
+
 
 router.get('/login', function (req, res, next) {
   res.render('login')
