@@ -75,9 +75,7 @@ router.post('/signup_form', function (req, res, next) {
 	})
   	res.redirect('display-property')
 })
-router.get('/post_sign_up', function (req, res, next) {
-  	res.render('display-property')
-})
+
 
 router.get('/login', function (req, res, next) {
   res.render('login')
