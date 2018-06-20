@@ -1,0 +1,37 @@
+Welcome Azlan
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Meta Tags for Bootstrap 4 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap 4 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+</head>
+<body>
+<!-- Start of Card Deck Layout -->
+<div class="card-deck" style="width: 90%; padding-left: 30%;">
+
+		<div class="card">
+			<img class="card-img-top" src="https://picsum.photos/500/300/?image=<%=Math.floor(Math.random()*50) %>" alt="Card image cap">
+			<div class="card-body">
+				<h4 class="card-title" href='www.google.com'><%= property.property_name %>
+</h4>
+				<p class="card-text"> <%= property.detailed_description %> </p>
+			</div>
+			<div class="card-footer">
+				<small class="text-muted">£<%= property.price_per_night %> per night<br>
+          <%= property.guests %> guests<br>
+          <%= property.beds %> beds<br>
+          <%= property.bath %> bathrooms<br>
+          Date available: <%= property.date_available %><br>
+          Available until: <%= property.available_until %><br>
+        </small>
+        <input class="btn btn-primary" type="submit" id="Submit" name="Submit" value="Email Host">
+			</div>
+		</div>
+
+</body>
+</html>

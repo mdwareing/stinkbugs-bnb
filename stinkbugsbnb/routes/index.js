@@ -55,7 +55,6 @@ router.get('/display-property', function (req, res, next) {
        data: list_properties
      });
    });
-
 })
 
 router.get('/signup', function (req, res, next) {
@@ -76,22 +75,8 @@ router.post('/signup_form', function (req, res, next) {
   	res.redirect('display-property')
 })
 
-
 router.get('/login', function (req, res, next) {
   res.render('login')
 })
-
-router.get('/property/:id', function (req, res, next) {
-  Property.findOne ({
-    '_id':request.params.id},
-    function(error,property) {
-    if(!property) {
-      return res.redirect('/display-property');
-   }
-   res.render('property', {
-     property: req.property;
-   });
- });
-});
 
 module.exports = router;

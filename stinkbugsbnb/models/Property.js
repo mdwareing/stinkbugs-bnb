@@ -40,8 +40,8 @@ const PropertySchema = new Schema({
 
   });
 
-Property.virtual('url').get(function(){
-  return '/property' + this._id  
+PropertySchema.virtual('url').get(function(){
+  return '/property' + this._id
 })
 
 module.exports = mongoose.model('Property', PropertySchema);
