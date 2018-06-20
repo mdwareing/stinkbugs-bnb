@@ -18,7 +18,7 @@ context('user adds property with form', () => {
       .type('4')
     cy.get('input[name=location]')
       .type('Sardinia')
-    cy.get('input[name=detailed_description]')
+    cy.get('textarea[name=detailed_description]')
       .type('Cool property in the heart of Sardinia. No dogs allowed.')
     cy.get('input[name=date_available]')
       .type('2018-04-17')
