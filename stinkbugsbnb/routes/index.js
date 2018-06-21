@@ -63,6 +63,7 @@ router.get('/signup', function (req, res, next) {
 
 router.post('/signup_form', function (req, res, next) {
 	const data = req.body
+	
 	const User = mongoose.model('User');
 	new_user = new User({
 		user_name: data.user_name,
