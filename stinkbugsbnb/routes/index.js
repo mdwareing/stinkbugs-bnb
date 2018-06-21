@@ -15,7 +15,7 @@ const Property = mongoose.model('Property');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('add-property');
+  res.render('login');
 });
 
 router.post('/', function (req, res, next) {
@@ -78,6 +78,10 @@ router.post('/signup_form', function (req, res, next) {
 
 router.get('/login', function (req, res, next) {
   res.render('login')
+})
+
+router.get('/add-property', function (req, res, next) {
+  res.render('add-property')
 })
 
 module.exports = router;
