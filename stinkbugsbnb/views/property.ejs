@@ -47,7 +47,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal" action="/" method="post" id="add_property-form">
+                <form class="form-horizontal" action="/property/sendemail" method="post" id="add_property-form">
 
                 <div class="form-group">
                   <label>Lead guest's name:</label>
@@ -83,12 +83,13 @@
                   <input type="email" class="form-control" name="email_address">
                 </div>
 
-              </form>
 
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send booking request</button>
+                <button type="submit" class="btn btn-primary">Send booking request</button>
+              </form>
+
               </div>
             </div>
           </div>
