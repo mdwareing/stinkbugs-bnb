@@ -85,28 +85,52 @@ router.get('/login', function (req, res, next) {
 
 router.post("/login", function(req, res, next){
   const data = req.body;
-
-  // check that the user email exists in the database
-  var users_email_address = data.email_address;
   var bcrypt = require('bcrypt');
-  var users_password = bcrypt.hashSync(data.password, bcrypt.genSaltSync(8), null)
 
-  Users.find({email_address: users_email_address, password: users_password })
+  // get the email that user entered on login
+  var users_email_address = data.email_address;
+
+  // bcrypt the password user entered on login
+  var users_password = bcrypt.hashSync(data.password, bcrypt.genSaltSync(8), null)
+  console.log("password b4 bcrypt: ", data.password)
+  console.log("passwords after bcrypt: ", users_password)
+
+  // Search DB for email address
+  Users.find({email_address: users_email_address })
     .exec(function (err, result) {
       if (err) {
         return next(err);
       }
-      if (result.password === undefined) {
+      console.log("reaching 1")
+
+      var compareboth = (login, database) => {
+
+        return new Promise((resolve, reject) => {
+
+          bcrypt.compare(login, database, function(err, isMatch){
+            console.log("IS MATCH = :",isMatch)
+              resolve(isMatch);
+          });
+        });
+      };
+      // If email didnt match any in the DB, redirect to login
+      if (result[0] === undefined) {
+        console.log("reaching 2")
         res.redirect('login');
-      } else {
-        req.session.userId = result[0].user_name;
-      	res.redirect('display-property')
+      // If email is in DB, check the passwords match
+    } else {
+
+        compareboth(data.password, result[0].password).then((isMatch) => {
+            if(isMatch) {
+              req.session.userId = result[0].user_name;
+            	res.redirect('display-property')
+            } else {
+              res.redirect('login')
+            }
+
+        });
       }
     });
-
-
-  // If it does, put it on the page
-  // res.redirect('display-property')
 });
 
 router.get('/add-property', function (req, res, next) {
