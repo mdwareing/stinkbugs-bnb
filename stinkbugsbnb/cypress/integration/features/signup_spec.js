@@ -15,7 +15,6 @@ context('user signs up', () => {
        .type('password')
      cy.get('#sign_up_form').submit()
 
-
      cy.url().should('eq', 'http://localhost:3000/display-property')
      cy.contains('Welcome, Rob')
    });

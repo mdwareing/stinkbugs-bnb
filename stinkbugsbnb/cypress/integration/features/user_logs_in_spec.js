@@ -7,30 +7,32 @@ context('user can sign in', () => {
     cy.visit('http://localhost:3000/login')
   })
 
-  xit('requires email', function (){
-    cy.get('#Submit').click()
-    cy.contains('Please fill in this field.')
-  });
+  // it('requires email', function (){
+  //   cy.get('#Submit').click()
+  //   cy.contains('Please fill in this field.')
+  // });
+  //
+  // it('requires password', function (){
+  //   cy.get('input[name=email_address]')
+  //     .type('test@gmail.com{enter}')
+  //   cy.contains('email and password combination incorrect')
+  // });
+  //
+  // it('requires valid username and password', function (){
+  //   cy.get('input[name=email_address]')
+  //     .type('test@gmail.com')
+  //   cy.get('input[name=password]')
+  //     .type('invalid{enter}')
+  //   cy.contains('email and password combination incorrect')
+  // });
 
-  xit('requires password', function (){
+  it('Greets user with name on /display-property', function (){
     cy.get('input[name=email_address]')
-      .type('test@gmail.com{enter}')
-    cy.contains('email and password combination incorrect')
-  });
-
-  xit('requires valid username and password', function (){
-    cy.get('input[name=email_address]')
-      .type('test@gmail.com')
+      .type('testforlogin@email.com')
     cy.get('input[name=password]')
-      .type('invalid{enter}')
-    cy.contains('email and password combination incorrect')
-  });
+      .type('password{enter}')
 
-  it('navigates to /display-property on successful login', function (){
-    cy.get('input[name=email_address]')
-      .type('test@gmail.com')
-    cy.get('input[name=password]')
-      .type('valid{enter}')
     cy.url().should('eq', 'http://localhost:3000/display-property')
+    cy.contains('Welcome, TestForLogin')
   });
 })

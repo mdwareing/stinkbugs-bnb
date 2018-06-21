@@ -13,6 +13,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 require('../models/Property');
 require('../models/User');
 const Property = mongoose.model('Property');
+const Users = mongoose.model('User');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -81,6 +82,32 @@ router.post('/signup_form', function (req, res, next) {
 router.get('/login', function (req, res, next) {
   res.render('login')
 })
+
+router.post("/login", function(req, res, next){
+  const data = req.body;
+
+  // check that the user email exists in the database
+  var users_email_address = data.email_address;
+  console.log("email address", users_email_address)
+
+  var answer = Users.find({email_address: users_email_address});
+  console.log("ANSWER ", answer.query );
+  Users.find({email_address: users_email_address})
+    .exec(function (err, result) {
+      if (err) {
+
+        return next(err);
+      }
+      // req.session.userId = result[0].user_name;
+      req.session.userId = result[0].user_name;
+    	res.redirect('display-property')
+    });
+
+    console.log("passed again");
+
+  // If it does, put it on the page
+  // res.redirect('display-property')
+});
 
 router.get('/add-property', function (req, res, next) {
   res.render('add-property')
