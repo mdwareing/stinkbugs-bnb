@@ -1,10 +1,9 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema
 require('mongoose-type-email');
 var bcrypt = require('bcrypt');
 
 
-const UserSchema = new Schema({
+let UserSchema = new mongoose.Schema({
     user_name: {
     	type: String,
     	required: true,
@@ -25,15 +24,21 @@ const UserSchema = new Schema({
 
   });
 
-UserSchema.pre('save', function (next) {
-  var user = this;
-  bcrypt.hash(user.password, 8, function (err, hash) {
-    if (err) {
-      return next(err);
-    }
-    user.password = hash;
-    next();
-  })
-})
+UserSchema.methods.generateHash = function(password) {
+ return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
 
-module.exports = mongoose.model('User', UserSchema);
+//
+// UserSchema.pre('save', function (next) {
+//   var user = this;
+//   bcrypt.hash(user.password, 10, function (err, hash) {
+//     if (err) {
+//       return next(err);
+//     }
+//     user.password = hash;
+//     next();
+//   })
+// })
+
+var User = mongoose.model('User', UserSchema);
+module.exports = User;
