@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
+var User = require('../models/User');
 
 
 var mongoDB = 'mongodb://admin123:admin123@ds161700.mlab.com:61700/stinkbugs-bnb';
@@ -63,13 +64,12 @@ router.get('/signup', function (req, res, next) {
 
 router.post('/signup_form', function (req, res, next) {
 	const data = req.body
-	
-	const User = mongoose.model('User');
-	new_user = new User({
-		user_name: data.user_name,
-		email_address: data.email_address,
-		password: data.password
-	})
+	// const User = mongoose.model('User');
+	var new_user = new User ();
+  new_user.user_name = data.user_name,
+  new_user.email_address = data.email_address,
+  new_user.password = new_user.generateHash(data.password)
+
 	db.collection('users').save(new_user, function(err){
 		if (err) return handleError(err);
 	})
