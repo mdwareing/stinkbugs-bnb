@@ -14,7 +14,7 @@ const PropertySchema = new Schema({
     	type: Number,
     	min: [0, 'Cannot be 0']
     },
-    
+
     guests: {type: Number,required: true},
     bedrooms:{type: Number,required: true},
     beds: {type: Number,required: true},
@@ -39,5 +39,9 @@ const PropertySchema = new Schema({
     }
 
   });
-  
+
+PropertySchema.virtual('url').get(function(){
+  return '/property' + this._id
+})
+
 module.exports = mongoose.model('Property', PropertySchema);
