@@ -23,18 +23,18 @@ context('user signs up', () => {
 
  });
 
- context('When user enters invalid information', function(){
-  it('redirects to /display-property with welcome msg', function(){
-     cy.get('input[name=user_name]')
-       .type(" ")
-     
-     cy.get('#sign_up_form').submit()
-
-
-     cy.url().should('eq', 'http://localhost:3000/signup')
-     cy.contains('Welcome, Rob')
-   });
-
- });
+ // context('When user enters invalid information', function(){
+ //  it('redirects to /display-property with welcome msg', function(){
+ //     cy.get('input[name=user_name]')
+ //       .type(" ")
+ //
+ //     cy.get('#sign_up_form').submit()
+ //
+ //
+ //     cy.url().should('eq', 'http://localhost:3000/signup')
+ //     cy.contains('Welcome, Rob')
+ //   });
+ //
+ // });
 
 })

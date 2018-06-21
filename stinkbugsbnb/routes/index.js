@@ -53,7 +53,8 @@ router.get('/display-property', function (req, res, next) {
      }
      res.render('display-property', {
        title: 'Book List',
-       data: list_properties
+       data: list_properties,
+       sessionId: req.session.userId
      });
    });
 })
@@ -73,6 +74,7 @@ router.post('/signup_form', function (req, res, next) {
 	db.collection('users').save(new_user, function(err){
 		if (err) return handleError(err);
 	})
+    req.session.userId = new_user.user_name;
   	res.redirect('display-property')
 })
 
