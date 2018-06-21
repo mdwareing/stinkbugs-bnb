@@ -88,22 +88,22 @@ router.post("/login", function(req, res, next){
 
   // check that the user email exists in the database
   var users_email_address = data.email_address;
-  console.log("email address", users_email_address)
+  var bcrypt = require('bcrypt');
+  var users_password = bcrypt.hashSync(data.password, bcrypt.genSaltSync(8), null)
 
-  var answer = Users.find({email_address: users_email_address});
-  console.log("ANSWER ", answer.query );
-  Users.find({email_address: users_email_address})
+  Users.find({email_address: users_email_address, password: users_password })
     .exec(function (err, result) {
       if (err) {
-
         return next(err);
       }
-      // req.session.userId = result[0].user_name;
-      req.session.userId = result[0].user_name;
-    	res.redirect('display-property')
+      if (result.password === undefined) {
+        res.redirect('login');
+      } else {
+        req.session.userId = result[0].user_name;
+      	res.redirect('display-property')
+      }
     });
 
-    console.log("passed again");
 
   // If it does, put it on the page
   // res.redirect('display-property')
