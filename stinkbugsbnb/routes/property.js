@@ -37,16 +37,24 @@ router.post('/sendemail', function (req, res, next) {
            pass: 'eNgGXUpEdK2H7fXsCF'
        }
     });
-
+    // console.log(req.body.guests)
+    // const host_email = Property.findOne ({
+    //   '_id': req.params.id},
+    //   function(error, property) {
+    //     if(!property) {
+    //       return res.redirect('/${req.params.id}')
+    //     }
+    //     return property.email_address;
+    // });
     let mailOptions = {
       from: '"Villa Renter" <ugk5sxyxzpyuj3db@ethereal.email>',
-      to: 'stinbugsbnb@gmail.com',
+      to: req.body.test,
       subject: 'Rent boy',
-      text: 'Give me the fucking villa and im bringing the dog',
+      text: 'Give me the villa and im bringing the dog',
       html: '<br>yeah boiiiiiii</br>'
     };
 
-    transporter.sendMail(mailOptions, (err, info) => {
+    transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         return console.log(error);
       }
