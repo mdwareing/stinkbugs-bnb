@@ -10,6 +10,8 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+//adding somehting new as a test
+
 require('../models/Property');
 require('../models/User');
 const Property = mongoose.model('Property');
@@ -67,6 +69,9 @@ router.get('/signup', function (req, res, next) {
 })
 
 router.post('/signup_form', function (req, res, next) {
+
+  console.log("this is a test"+process.env.NODE_ENV)
+
 	const data = req.body
 
 	//checking if email address already exists in db
