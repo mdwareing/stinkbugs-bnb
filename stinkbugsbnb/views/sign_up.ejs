@@ -2,11 +2,18 @@
 <header>
   <%- include ./partials/_header.ejs %>
 </header>
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Amita' rel='stylesheet'>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
 
-<body style="background-color: #e6ffe6;">
-  <h1 style="text-align: center;">Feel at home, anywhere</h1>
-  <h2 style="text-align: center;">Sign up to Stinkbugs B'n'B</h2>
-  <div style="background-color: #85e085; margin: auto; width: 50%; border: 3px solid green; padding: 50px;">
+<body style="font-family: 'Amita'; background-color: #e6f9ff;">
+  <div style="width: 100%;">
+  <%- include ./partials/_navbar.ejs %>
+</div>
+<div style="padding: 50px; color: blue">
+</div>
+  <div style="background-color: #e6f9ff; margin: auto; width: 50%; border: 3px solid blue; padding: 50px;">
   <form class="form-horizontal" action="/signup_form" method="post" id="sign_up_form">
 
     <div class="form-group">
@@ -29,6 +36,7 @@
     <input type="password" class="form-control" name="password_confirmation">
   </div>
 
+  Email address already exists. Please use login.
   <div>
     <input class="btn btn-primary" type="submit" id="Submit" name="Submit" value="Sign Me Up"><br>
   </div>

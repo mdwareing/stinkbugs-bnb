@@ -17,7 +17,7 @@ const Users = mongoose.model('User');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('login');
+  res.redirect('login');
 });
 
 router.post('/', function (req, res, next) {
@@ -68,26 +68,52 @@ router.get('/signup', function (req, res, next) {
 
 router.post('/signup_form', function (req, res, next) {
 	const data = req.body
+
+	//checking if email address already exists in db
+
+	Users.find({email_address: data.email_address })
+    .exec(function (err, result) {
+      if (err) {
+        return next(err);
+      }
+
+      if (result[0] === undefined){
+
+
 	// const User = mongoose.model('User');
 	var new_user = new User ();
-  new_user.user_name = data.user_name,
-  new_user.email_address = data.email_address,
-  new_user.password = new_user.generateHash(data.password)
+	new_user.user_name = data.user_name,
+	new_user.email_address = data.email_address,
+	new_user.password = new_user.generateHash(data.password)
 
 	db.collection('users').save(new_user, function(err){
-		if (err) return handleError(err);
-	})
-    req.session.userId = new_user.user_name;
-  	res.redirect('display-property')
+	if (err) return handleError(err);
+		})
+		req.session.userId = new_user.user_name;
+		res.redirect('display-property')
+
+	} else {
+		res.render('sign_up', {
+			errorMessage: "Email address already exists. Please use login"
+		})
+	  }
+
+	});
+	
 })
 
+
 router.get('/login', function (req, res, next) {
-  res.render('login')
+  res.render('login', {
+    errorMessage: " "
+  });
 })
 
 router.post("/login", function(req, res, next){
   const data = req.body;
   var users_email_address = data.email_address;
+
+
 
   Users.find({email_address: users_email_address })
     .exec(function (err, result) {
@@ -96,18 +122,29 @@ router.post("/login", function(req, res, next){
       }
       // If email didnt match any in the DB, redirect to login
       if (undefined === result[0]) {
-        res.redirect('login');
+        renderLoginWithNoErrorMessage()
       // If email is in DB, check the passwords match
       } else {
         bcrypt.compare(data.password, result[0].password, function(err, isMatch){
           if(isMatch) {
             req.session.userId = result[0].user_name;
+            res.redirect('display-property')
+          } else {
+            renderLoginWithNoErrorMessage()
           }
-          res.redirect((isMatch) ? 'display-property' : 'login');
         });
       }
     });
+
+    var renderLoginWithNoErrorMessage = function() {
+      res.render('login', {
+        errorMessage: "Username and password are not correct"
+      });
+    };
+
+
 });
+
 
 router.get('/add-property', function (req, res, next) {
   res.render('add-property')
