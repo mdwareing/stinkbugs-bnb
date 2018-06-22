@@ -4,17 +4,14 @@
 
 context('user can sign in', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/signup')
-    cy.get('input[name=user_name]')
-      .type('TestingTheLoginPage')
-    cy.get('input[name=email_address]')
-      .type('testingtheloginpage@gmail.com')
-    cy.get('input[name=password]')
-      .type('password')
-    cy.get('input[name=password_confirmation]')
-      .type('password')
-    cy.get('#sign_up_form').submit()
-  })
+   // Register a user in the datbase
+   cy.request('POST', 'http://localhost:3000/signup_form', {
+     user_name: 'TestingTheLoginPage',
+     email_address: 'testingtheloginpage@gmail.com',
+     password: 'password',
+     password_confirmation: 'password',
+   });
+ });
 
   context('When login details valid', function(){
     it('Greets user with name on /display-property', function (){
@@ -49,5 +46,5 @@ context('user can sign in', () => {
 
       cy.url().should('eq', 'http://localhost:3000/login')
     });
-  });]
+  });
 });
