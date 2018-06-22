@@ -3,37 +3,18 @@
 // I need to be able to login
 
 context('user can sign in', () => {
-  // beforeEach(() => {
-  //   cy.visit('http://localhost:3000/signup')
-  //   cy.get('input[name=user_name]')
-  //     .type('TestingTheLoginPage')
-  //   cy.get('input[name=email_address]')
-  //     .type('testingtheloginpage@gmail.com')
-  //   cy.get('input[name=password]')
-  //     .type('password')
-  //   cy.get('input[name=password_confirmation]')
-  //     .type('password')
-  //   cy.get('#sign_up_form').submit()
-  // })
-
-  // it('requires email', function (){
-  //   cy.get('#Submit').click()
-  //   cy.contains('Please fill in this field.')
-  // });
-  //
-  // it('requires password', function (){
-  //   cy.get('input[name=email_address]')
-  //     .type('test@gmail.com{enter}')
-  //   cy.contains('email and password combination incorrect')
-  // });
-  //
-  // it('requires valid username and password', function (){
-  //   cy.get('input[name=email_address]')
-  //     .type('test@gmail.com')
-  //   cy.get('input[name=password]')
-  //     .type('invalid{enter}')
-  //   cy.contains('email and password combination incorrect')
-  // });
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/signup')
+    cy.get('input[name=user_name]')
+      .type('TestingTheLoginPage')
+    cy.get('input[name=email_address]')
+      .type('testingtheloginpage@gmail.com')
+    cy.get('input[name=password]')
+      .type('password')
+    cy.get('input[name=password_confirmation]')
+      .type('password')
+    cy.get('#sign_up_form').submit()
+  })
 
   context('When login details valid', function(){
     it('Greets user with name on /display-property', function (){
@@ -49,7 +30,7 @@ context('user can sign in', () => {
   });
 
   context('When login details invalid', function(){
-    it('Greets user with name on /display-property', function (){
+    it('Invalid password returns user to login page', function (){
       cy.visit('http://localhost:3000/login')
       cy.get('input[name=email_address]')
         .type('testingtheloginpage@gmail.com')
@@ -58,6 +39,15 @@ context('user can sign in', () => {
 
       cy.url().should('eq', 'http://localhost:3000/login')
     });
-  });
 
-})
+    it('Invalid email returns user to login page', function (){
+      cy.visit('http://localhost:3000/login')
+      cy.get('input[name=email_address]')
+        .type('completelyWrongEmail@gmail.com')
+      cy.get('input[name=password]')
+        .type('irrelevantPassword{enter}')
+
+      cy.url().should('eq', 'http://localhost:3000/login')
+    });
+  });]
+});
