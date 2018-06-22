@@ -1,12 +1,19 @@
 
 <html>
+<head>
+<link href='https://fonts.googleapis.com/css?family=Amita' rel='stylesheet'>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
 <header>
   <%- include ./partials/_header.ejs %>
 </header>
 
-<body style="background-color: #e6ffe6;">
-  <h1 style="text-align: center;">List a Space</h1>
-  <div style="background-color: #85e085; margin: auto; width: 50%; border: 3px solid green; padding: 50px;">
+<body style="background-color: #3399ff; font-family: 'Amita'">
+  <div style="width: 100%;">
+  <%- include ./partials/_navbar.ejs %>
+</div>
+  <div style="text-align: center; padding: 30px;"></div>
+  <div style="background-color: #e6f9ff; margin: auto; width: 50%; border: 3px solid blue; padding: 50px;">
   <form class="form-horizontal" action="/" method="post" id="add_property-form">
 
   <div class="form-group">
