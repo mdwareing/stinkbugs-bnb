@@ -4,33 +4,47 @@
 
 context('user can sign in', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/login')
-  })
+   // Register a user in the database
+   cy.request('POST', 'http://localhost:3000/signup_form', {
+     user_name: 'TestingTheLoginPage',
+     email_address: 'testingtheloginpage@gmail.com',
+     password: 'password',
+     password_confirmation: 'password',
+   });
+   cy.visit('http://localhost:3000/login')
+ });
 
-  xit('requires email', function (){
-    cy.get('#Submit').click()
-    cy.contains('Please fill in this field.')
+  context('When login details valid', function(){
+    it('Greets user with name on /display-property', function (){
+      cy.get('input[name=email_address]')
+        .type('testingtheloginpage@gmail.com')
+      cy.get('input[name=password]')
+        .type('password{enter}')
+
+      cy.url().should('eq', 'http://localhost:3000/display-property')
+      cy.contains('Welcome, TestingTheLoginPage')
+    });
   });
 
-  xit('requires password', function (){
-    cy.get('input[name=email_address]')
-      .type('test@gmail.com{enter}')
-    cy.contains('email and password combination incorrect')
-  });
+  context('When login details invalid', function(){
+    it('Invalid password returns user to login page', function (){
+      cy.get('input[name=email_address]')
+        .type('testingtheloginpage@gmail.com')
+      cy.get('input[name=password]')
+        .type('wrongpassword{enter}')
 
-  xit('requires valid username and password', function (){
-    cy.get('input[name=email_address]')
-      .type('test@gmail.com')
-    cy.get('input[name=password]')
-      .type('invalid{enter}')
-    cy.contains('email and password combination incorrect')
-  });
+      cy.contains('Username and password are not correct')
+      cy.url().should('eq', 'http://localhost:3000/login')
+    });
 
-  it('navigates to /display-property on successful login', function (){
-    cy.get('input[name=email_address]')
-      .type('test@gmail.com')
-    cy.get('input[name=password]')
-      .type('valid{enter}')
-    cy.url().should('eq', 'http://localhost:3000/display-property')
+    it('Invalid email returns user to login page', function (){
+      cy.get('input[name=email_address]')
+        .type('completelyWrongEmail@gmail.com')
+      cy.get('input[name=password]')
+        .type('irrelevantPassword{enter}')
+
+      cy.contains('Username and password are not correct')
+      cy.url().should('eq', 'http://localhost:3000/login')
+    });
   });
-})
+});
