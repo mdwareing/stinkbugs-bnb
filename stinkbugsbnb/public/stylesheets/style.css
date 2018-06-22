@@ -1,9 +1,8 @@
 body {
   background-color: #3399ff;
-  background-size: 100%;
-  background-repeat: no-repeat;
+  background-image: url("https://bit.ly/2K9enRF"), url("https://bit.ly/2tj3CCM");
+  background-repeat: no-repeat, repeat;
 
-  background-image: url("https://bit.ly/2K9enRF");
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }

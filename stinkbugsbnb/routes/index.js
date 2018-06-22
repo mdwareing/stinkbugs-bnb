@@ -97,7 +97,7 @@ router.post('/signup_form', function (req, res, next) {
 	  }
 
 	});
-	
+
 })
 
 
@@ -147,5 +147,17 @@ router.post("/login", function(req, res, next){
 router.get('/add-property', function (req, res, next) {
   res.render('add-property')
 })
+
+router.get('/logout', function (req, res, next) {
+  if (req.session) {
+    req.session.destroy(function (err) {
+      if (err) {
+        return next(err);
+      } else {
+        return res.redirect('/display-property');
+      }
+    });
+  }
+});
 
 module.exports = router;
