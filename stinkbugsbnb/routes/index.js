@@ -36,7 +36,9 @@ router.post('/', function (req, res, next) {
     detailed_description: data.detailed_description,
     date_available: data.date_available,
     available_until: data.available_until,
-    email_address: data.email_address
+    email_address: data.email_address,
+    host_id: req.session.userId
+
   })
   db.collection('properties').save(test, function (err) {
     if (err) return handleError(err);

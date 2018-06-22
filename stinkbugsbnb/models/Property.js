@@ -36,6 +36,10 @@ const PropertySchema = new Schema({
     email_address: {
     	type: mongoose.SchemaTypes.Email,
     	required: true
+    },
+    host_id: {
+      type: String,
+      required: true
     }
 
   });
