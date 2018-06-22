@@ -25,6 +25,26 @@ context('user signs up', () => {
 
    context('When the email already exists in the database', function(){
      it('it notifies user that email address already in use', function(){
+      
+      cy.request('POST', 'http://localhost:3000/signup_form', {
+        user_name: 'TestingTheLoginPage',
+        email_address: 'testingtheloginpage@gmail.com',
+        password: 'password',
+        password_confirmation: 'password',
+      });
+
+      cy.get('input[name=user_name]')
+         .type('Rob')
+      cy.get('input[name=email_address]')
+         .type('testingtheloginpage@gmail.com')
+      cy.get('input[name=password]')
+         .type('password')
+      cy.get('input[name=password_confirmation]')
+         .type('password')
+      cy.get('#sign_up_form').submit()
+   
+      cy.contains('Email address already exists. Please use login.')
+      cy.url().should('eq', 'http://localhost:3000/signup_form')
 
      });
    });

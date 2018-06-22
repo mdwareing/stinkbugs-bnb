@@ -66,18 +66,40 @@ router.get('/signup', function (req, res, next) {
 
 router.post('/signup_form', function (req, res, next) {
 	const data = req.body
+
+	//checking if email address already exists in db
+
+	Users.find({email_address: data.email_address })
+    .exec(function (err, result) {
+      if (err) {
+        return next(err);
+      }
+
+      if (result[0] === undefined){
+
+
 	// const User = mongoose.model('User');
 	var new_user = new User ();
-  new_user.user_name = data.user_name,
-  new_user.email_address = data.email_address,
-  new_user.password = new_user.generateHash(data.password)
+	new_user.user_name = data.user_name,
+	new_user.email_address = data.email_address,
+	new_user.password = new_user.generateHash(data.password)
 
 	db.collection('users').save(new_user, function(err){
-		if (err) return handleError(err);
-	})
-    req.session.userId = new_user.user_name;
-  	res.redirect('display-property')
+	if (err) return handleError(err);
+		})
+		req.session.userId = new_user.user_name;
+		res.redirect('display-property')
+
+	} else {
+		res.render('sign_up', {
+			errorMessage: "Email address already exists. Please use login"
+		})
+	  }
+
+	});
+	
 })
+
 
 router.get('/login', function (req, res, next) {
   res.render('login', {
@@ -117,6 +139,8 @@ router.post("/login", function(req, res, next){
         errorMessage: "Username and password are not correct"
       });
     };
+
+
 });
 
 
