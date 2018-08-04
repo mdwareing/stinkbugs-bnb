@@ -1,4 +1,5 @@
 # Stinkbugs-BnB
+![Stinkbugs](https://github.com/n-ckr-ch-rds-n/stinkbugs-bnb/blob/master/stinkbugsbnb/public/assets/screenshot.png)
 
 Stinkbugs-BnB is a clone of AirBnB built with NodeJS and MongoDB as a group project during week 5 by team Glossy Stinkbugs of the May 2018 cohort at Makers Academy.
 
